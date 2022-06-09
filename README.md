@@ -1,2 +1,3 @@
-# bmi-calc
-Open Source BMI calculator
+# BMI calculator
+A open Simple Source Project to start your web development journey with.
+
