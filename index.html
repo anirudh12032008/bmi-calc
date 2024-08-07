@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>BMI Calculator</title>
+<script>
+	// for changing between metric and america-metric
+	let x = false;
+	function changeForm(){
+		if (!x){
+			// open metric
+			document.getElementById('metric').classList.remove("hidden");
+			document.getElementById('imperial').classList.add("hidden");
+			document.getElementById('changeForm').innerHTML = "Change to imperial";
+		}else{
+			// close metric
+			document.getElementById('metric').classList.add("hidden");
+			document.getElementById('imperial').classList.remove("hidden");
+			document.getElementById('changeForm').innerHTML = "Change to metric";
+		}
+		x = !x;
+	}
+	function calcBMI(metric=false) {
+		if(metric){
+			// [weight (kg) / height (cm) / height (cm)] x 10,000
+			var height = document.bmiform.cm.value, weight = document.bmiform.kg.value;
+			document.bmiform.bmi.value = parseInt((weight/height/height)*10000);
+			return;
+		}
+		var weight = document.bmiform.pounds.value, height = document.bmiform.inches.value;
+		document.bmiform.bmi.value = parseInt((weight * 703) / (height * height));
+	}
+</script>
+<style>
+.hidden {
+	display: none;
+}
+fieldset {
+	width: 300px;
+	margin: 25px 0 0 50px;
+	border: 1px solid #999999;
+	box-shadow: 1px 1px #cccccc;
+	padding: 10px;
+}
+label {
+	float: left;
+	width: 140px;
+	display: block;
+	clear: left;
+	text-align: right;
+	padding-right: 10px;
+	margin-top: 10px;
+}
+button {
+	margin-left: 150px;
+}
+input {
+	margin-top: 10px;
+	display: block;
+	text-align: right;
+	width: 128px;
+}
+#bmi_label {
+	width: 200px;
+}
+#bmi {
+	width: 66px;
+}
+#intro {
+	width: 300px;
+	margin: 25px 0 0 50px;
+	padding: 10px;
+	border: 1px solid #999999;
+	box-shadow: 1px 1px #cccccc;
+}
+</style>
+</head>
+<body>
+	<div>
+		<p id="intro">Calculate your BMI (body mass index) by using the form below. Enter your weight and height and click the Calculate button to display your BMI result.</p>
+		<button id="changeForm" onclick="changeForm()">Change to metric</button>
+		<form action="" name="bmiform">
+			<fieldset id="metric" class="hidden">
+				<legend>Height and Weight</legend>
+				<label for="kg">Weight (kilograms):</label>
+				<input type="text" name="kg" id="kg">
+				<br>
+				<label for="cm">Height (centimeters):</label>
+				<input type="text" name="cm" id="cm">
+				<br>
+				<button type="button" name="calculate" value="Calculate your BMI" onclick="calcBMI(true)">Calculate your BMI</button>
+			</fieldset>
+			<fieldset id="imperial">
+				<legend>Height and Weight</legend>
+				<label for="pounds">Weight (pounds):</label>
+				<input type="text" name="pounds" id="pounds">
+				<br>
+				<label for="inches">Height (inches):</label>
+				<input type="text" name="inches" id="inches">
+				<br>
+				<button type="button" name="calculate" value="Calculate your BMI" onclick="calcBMI(false)">Calculate your BMI</button>
+			</fieldset>
+			<fieldset>
+				<legend>BMI</legend>
+				<label for="bmi" id="bmi_label">Your calculated BMI is:</label>
+				<input type="text" name="bmi" id="bmi" readonly="readonly">
+			</fieldset>
+		</form>
+	</div>
+</body>
+</html>
